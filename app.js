@@ -1,40 +1,50 @@
 const flags = require('./modules/flags');
 const usage = require('./modules/usage');
+const cgzip = require('./modules/cgzip');
+const ugzip = require('./modules/ugzip');
 const dec = require('./modules/dec');
 const enc = require('./modules/enc');
 
 const readlineSync = require('readline-sync');
 const crypto = require('crypto');
+const gzip = require('gzip-js');
+const argv = flags.argv;
 
 // get file prompt
 const file = process.argv[2];
 
+const inputFile = file;
+const outputFile = `${inputFile}.spacecat`;
 
-const argv = flags.argv;
+function spacecat(file, outputFile, argv){
 
-function processArgs(argv) {
     if (argv.password) {
         const password = readlineSync.question('Podaj hasło: ', {
             hideEchoBack: true,
         });
         console.log(`Podane hasło to: ${password}`);
+        var hashpassword = crypto.createHash('sha256').update(password).digest('base64').substr(0, 32);
 
-        try {
-            var hashpassword = crypto.createHash('sha256').update(password).digest('base64').substr(0, 32);
-            if (argv.encrypt) {
-                console.log('Szyfrowanie pliku...');
-                enc.encryptFile(file, hashpassword);
-            }
-            if (argv.decrypt) {
-                console.log('Odszyfrowywanie pliku...');
-                dec.decryptFile(file, hashpassword);
-            }
-        } catch (error) {
-            console.log(usage.usage());
+        //have extension .spacecat
+        if (file.endsWith('.spacecat')) {
+            dec.decryptFile(inputFile, hashpassword);
+            ugzip.ugzip(inputFile);
+        }
+        else {
+            cgzip.compressFile(inputFile, outputFile);
+            enc.encryptFile(outputFile, hashpassword);
+        }
+    }
+    else {
+        //have extension .spacecat
+        if (file.endsWith('.spacecat')) {
+            ugzip.ugzip(file);
+        }
+        else {
+            cgzip.compressFile(inputFile, outputFile);
         }
     }
 }
-
 
 // if user does not provide file path in command line, then show usage
 if (!file) {
@@ -42,6 +52,5 @@ if (!file) {
     process.exit();
 }
 else{
-    processArgs(argv);
+    spacecat(file, outputFile, argv);
 }
-

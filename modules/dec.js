@@ -2,8 +2,8 @@ const crypto = require('crypto');
 const algorithm = 'aes-256-cbc';
 const fs = require('fs');
 
-function decryptFile(file, password) {
-    const readInitVect = fs.createReadStream(file, { end: 15 });
+function decryptFile(inputFile, hashpassword) {
+    const readInitVect = fs.createReadStream(inputFile, { end: 15 });
 
     let iv;
     readInitVect.on('data', (chunk) => {
@@ -11,9 +11,9 @@ function decryptFile(file, password) {
     });
 
     readInitVect.on('close', () => {
-        const readStream = fs.createReadStream(file, { start: 16 });
-        const decipher = crypto.createDecipheriv(algorithm, password, iv);
-        const writeStream = fs.createWriteStream(`${file.slice(0, -4)}`, { flags: 'a' });
+        const readStream = fs.createReadStream(inputFile, { start: 16 });
+        const decipher = crypto.createDecipheriv(algorithm, hashpassword, iv);
+        const writeStream = fs.createWriteStream(`${inputFile.slice(0, -9)}`, { flags: 'a' });
 
         readStream
             .pipe(decipher)
