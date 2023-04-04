@@ -2,15 +2,15 @@ lockfileVersion: 5.4
 
 specifiers:
   crypto-js: ^4.1.1
-  gzip-js: ^0.3.2
   readline-sync: ^1.4.10
   yargs: ^17.7.1
+  zlib: ^1.0.5
 
 dependencies:
   crypto-js: 4.1.1
-  gzip-js: 0.3.2
   readline-sync: 1.4.10
   yargs: 17.7.1
+  zlib: 1.0.5
 
 packages:
 
@@ -46,20 +46,8 @@ packages:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: false
 
-  /crc32/0.2.2:
-    resolution: {integrity: sha512-PFZEGbDUeoNbL2GHIEpJRQGheXReDody/9axKTxhXtQqIL443wnNigtVZO9iuCIMPApKZRv7k2xr8euXHqNxQQ==}
-    engines: {node: '>= 0.4.0'}
-    hasBin: true
-    dev: false
-
   /crypto-js/4.1.1:
     resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
-    dev: false
-
-  /deflate-js/0.2.3:
-    resolution: {integrity: sha512-r5KgHJ/yTiWQs23nVeQz5dSL/kmW0MBszsssNyEqDCjjFDj4XG/c6QUN/I0JtY3ZHwwcaNBtGE8s+oV33acTfQ==}
-    engines: {node: '>= 0.4.0'}
-    hasBin: true
     dev: false
 
   /emoji-regex/8.0.0:
@@ -74,15 +62,6 @@ packages:
   /get-caller-file/2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
-    dev: false
-
-  /gzip-js/0.3.2:
-    resolution: {integrity: sha512-BFTiwtEN12koJsnhVo77SzW+u6VANzhaK0HEtdwFwgFzFOq1WQJ8eSPEyGAueUfs1C/WqdgtuYnUwCRuRm1A5Q==}
-    engines: {node: '>= 0.4.0'}
-    hasBin: true
-    dependencies:
-      crc32: 0.2.2
-      deflate-js: 0.2.3
     dev: false
 
   /is-fullwidth-code-point/3.0.0:
@@ -146,4 +125,9 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+    dev: false
+
+  /zlib/1.0.5:
+    resolution: {integrity: sha512-40fpE2II+Cd3k8HWTWONfeKE2jL+P42iWJ1zzps5W51qcTsOUKM5Q5m2PFb0CLxlmFAaUuUdJGc3OfZy947v0w==}
+    engines: {node: '>=0.2.0'}
     dev: false

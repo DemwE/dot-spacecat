@@ -1,13 +1,12 @@
 const flags = require('./modules/flags');
 const usage = require('./modules/usage');
-const cgzip = require('./modules/cgzip');
-const ugzip = require('./modules/ugzip');
+const { compressFile } = require('./modules/compress');
+const { decompressFile } = require('./modules/decompress');
 const dec = require('./modules/dec');
 const enc = require('./modules/enc');
 
 const readlineSync = require('readline-sync');
 const crypto = require('crypto');
-const gzip = require('gzip-js');
 const argv = flags.argv;
 
 // get file prompt
@@ -15,6 +14,7 @@ const file = process.argv[2];
 
 const inputFile = file;
 const outputFile = `${inputFile}.spacecat`;
+const orginalFile = `${inputFile.slice(0, -9)}`;
 
 function spacecat(file, outputFile, argv){
 
@@ -28,20 +28,20 @@ function spacecat(file, outputFile, argv){
         //have extension .spacecat
         if (file.endsWith('.spacecat')) {
             dec.decryptFile(inputFile, hashpassword);
-            ugzip.ugzip(inputFile);
+            decompressFile(orginalFile, orginalFile);
         }
         else {
-            cgzip.compressFile(inputFile, outputFile);
+            compressFile(inputFile, outputFile, { level: 9 });
             enc.encryptFile(outputFile, hashpassword);
         }
     }
     else {
         //have extension .spacecat
         if (file.endsWith('.spacecat')) {
-            ugzip.ugzip(file);
+            decompressFile(inputFile, orginalFile);
         }
         else {
-            cgzip.compressFile(inputFile, outputFile);
+            compressFile(inputFile, outputFile, { level: 9 });
         }
     }
 }

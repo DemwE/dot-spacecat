@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "crypto-js": "^4.1.1",
-    "gzip-js": "^0.3.2",
     "readline-sync": "^1.4.10",
-    "yargs": "^17.7.1"
+    "yargs": "^17.7.1",
+    "zlib": "^1.0.5"
   }
 }
